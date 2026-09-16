@@ -77,8 +77,14 @@ export default function Home() {
     const link = document.createElement("a");
     link.href = href;
     link.download = `${fileName.replace(/\.txt$/i, "")}-edited.txt`;
+    link.rel = "noopener";
+    link.style.display = "none";
+    document.body.appendChild(link);
     link.click();
-    URL.revokeObjectURL(href);
+    window.setTimeout(() => {
+      link.remove();
+      URL.revokeObjectURL(href);
+    }, 1500);
     toast.success("已开始下载");
   }
 
